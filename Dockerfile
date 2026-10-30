@@ -38,4 +38,5 @@ RUN python -m pip install --no-cache-dir \
 
 EXPOSE 6185
 
-CMD ["python", "main.py"]
+# Use the Dashboard built into this image, rather than an older data/dist.
+CMD ["python", "main.py", "--webui-dir", "/AstrBot/astrbot/dashboard/dist"]
