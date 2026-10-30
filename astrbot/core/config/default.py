@@ -129,6 +129,7 @@ DEFAULT_CONFIG = {
         "empty_mention_waiting_need_reply": True,
         "friend_message_needs_wake_prefix": False,
         "wake_user_ids": [],
+        "reply_blacklist_user_ids": [],
         "ignore_bot_self_message": False,
         "ignore_at_all": False,
     },
@@ -1188,6 +1189,11 @@ CONFIG_METADATA_2 = {
                     "friend_message_needs_wake_prefix": {
                         "type": "bool",
                         "hint": "启用后，私聊消息需要唤醒前缀才会被处理，同群聊一样。",
+                    },
+                    "reply_blacklist_user_ids": {
+                        "type": "list",
+                        "items": {"type": "string"},
+                        "hint": "黑名单用户在群聊和私聊中的消息均不会触发回复，包括 @、唤醒词和指令。OneBot v11 中填写 QQ 号。",
                     },
                     "wake_user_ids": {
                         "type": "list",
@@ -4426,6 +4432,12 @@ CONFIG_METADATA_3 = {
                     "wake_prefix": {
                         "description": "唤醒词",
                         "hint": "唤醒机器人的消息前缀的列表。也可以通过 @ 机器人来唤醒。",
+                        "type": "list",
+                        "items": {"type": "string"},
+                    },
+                    "platform_settings.reply_blacklist_user_ids": {
+                        "description": "回复用户黑名单",
+                        "hint": "黑名单用户在群聊和私聊中的消息均不会触发回复，包括 @、唤醒词和指令。OneBot v11 中填写 QQ 号。",
                         "type": "list",
                         "items": {"type": "string"},
                     },

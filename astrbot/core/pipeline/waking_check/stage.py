@@ -49,6 +49,13 @@ class WakingCheckStage(Stage):
             for user_id in wake_user_ids
             if user_id is not None and str(user_id).strip()
         }
+        self.reply_blacklist_user_ids = {
+            str(user_id).strip()
+            for user_id in self.ctx.astrbot_config["platform_settings"].get(
+                "reply_blacklist_user_ids", []
+            )
+            if user_id is not None and str(user_id).strip()
+        }
         # 是否忽略机器人自己发送的消息
         self.ignore_bot_self_message = self.ctx.astrbot_config["platform_settings"].get(
             "ignore_bot_self_message",
@@ -70,6 +77,10 @@ class WakingCheckStage(Stage):
         self,
         event: AstrMessageEvent,
     ) -> None | AsyncGenerator[None, None]:
+        if str(event.get_sender_id() or "").strip() in self.reply_blacklist_user_ids:
+            event.stop_event()
+            return
+
         # ignore bot self message
         if (
             self.ignore_bot_self_message

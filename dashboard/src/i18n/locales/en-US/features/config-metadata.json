@@ -989,6 +989,10 @@
           "description": "Private Messages Require Wake Word",
           "hint": "Private messages must also include a wake prefix to activate the bot."
         },
+        "reply_blacklist_user_ids": {
+          "description": "Reply User Blacklist",
+          "hint": "Messages from listed users cannot trigger replies in group or private chats, including mentions, wake words, and commands. For OneBot v11, enter QQ numbers."
+        },
         "wake_user_ids": {
           "description": "Wake by User ID",
           "hint": "In group chats, messages from listed users wake the bot without a mention or wake prefix. Send /sid in the group to get the UID. OneBot v11 uses a QQ number; QQ Official uses an OpenID."

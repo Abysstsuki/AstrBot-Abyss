@@ -49,6 +49,7 @@ The default AstrBot configuration is as follows:
         "empty_mention_waiting_need_reply": True,
         "friend_message_needs_wake_prefix": False,
         "wake_user_ids": [],
+        "reply_blacklist_user_ids": [],
         "ignore_bot_self_message": False,
         "ignore_at_all": False,
     },
@@ -248,6 +249,10 @@ Whether private messages on platforms require a wake prefix. Default is `false`.
 #### `platform_settings.wake_user_ids`
 
 In group chats, messages from listed users wake the bot without a mention or wake prefix. Enter the sender ID provided by the current messaging platform; for example, a QQ number on OneBot v11 or an OpenID on QQ Official. The default is an empty list.
+
+#### `platform_settings.reply_blacklist_user_ids`
+
+Messages from listed users cannot trigger replies in group or private chats, including mentions, wake words, and plugin commands. This takes precedence over wake-by-user-ID. Enter the platform sender ID, such as a QQ number on OneBot v11. The default is an empty list.
 
 #### `platform_settings.ignore_bot_self_message`
 

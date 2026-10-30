@@ -49,6 +49,7 @@ AstrBot 默认配置如下：
         "empty_mention_waiting_need_reply": True,
         "friend_message_needs_wake_prefix": False,
         "wake_user_ids": [],
+        "reply_blacklist_user_ids": [],
         "ignore_bot_self_message": False,
         "ignore_at_all": False,
     },
@@ -248,6 +249,10 @@ ID 白名单。填写后，将只处理所填写的 ID 发来的消息事件。�
 #### `platform_settings.wake_user_ids`
 
 群聊中，列表内用户发送的消息会直接唤醒机器人，无需 @ 或唤醒词。填写当前消息平台提供的发送者 ID；例如 OneBot v11 中为 QQ 号，QQ 官方机器人中为 OpenID。默认为空列表。
+
+#### `platform_settings.reply_blacklist_user_ids`
+
+黑名单用户的群聊和私聊消息不会触发机器人回复，包括 @、唤醒词和插件指令；黑名单优先于用户 ID 唤醒。填写平台发送者 ID，OneBot v11 中为 QQ 号。默认为空列表。
 
 #### `platform_settings.ignore_bot_self_message`
 

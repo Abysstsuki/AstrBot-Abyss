@@ -1010,6 +1010,10 @@
           "description": "私聊消息需要唤醒词",
           "hint": "私聊消息也必须带上唤醒前缀才能唤醒机器人。"
         },
+        "reply_blacklist_user_ids": {
+          "description": "回复用户黑名单",
+          "hint": "黑名单用户在群聊和私聊中的消息均不会触发回复，包括 @、唤醒词和指令。OneBot v11 中填写 QQ 号。"
+        },
         "wake_user_ids": {
           "description": "用户 ID 唤醒",
           "hint": "群聊中，列表内用户发送的消息会直接唤醒机器人，无需 @ 或唤醒词。在群内发送 /sid 获取 UID；OneBot v11 中是 QQ 号，QQ 官方机器人中是 OpenID。"
