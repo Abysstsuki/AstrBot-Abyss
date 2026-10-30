@@ -95,7 +95,7 @@ class AstrMessageEvent(abc.ABC):
         self.is_wake = False
         """是否唤醒(是否通过 WakingStage)"""
         self.is_at_or_wake_command = False
-        """是否是 At 机器人或者带有唤醒词或者是私聊(插件注册的事件监听器会让 is_wake 设为 True, 但是不会让这个属性置为 True)"""
+        """Whether addressed to the bot or matched a configured wake condition."""
         self._extras: dict[str, Any] = {}
         self._force_stopped: bool = False
         """独立的停止标志，不依赖 _result，不会被 clear_result() 重置"""

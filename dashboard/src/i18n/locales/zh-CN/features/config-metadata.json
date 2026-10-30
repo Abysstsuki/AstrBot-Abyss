@@ -1010,6 +1010,10 @@
           "description": "私聊消息需要唤醒词",
           "hint": "私聊消息也必须带上唤醒前缀才能唤醒机器人。"
         },
+        "wake_user_ids": {
+          "description": "用户 ID 唤醒",
+          "hint": "群聊中，列表内用户发送的消息会直接唤醒机器人，无需 @ 或唤醒词。在群内发送 /sid 获取 UID；OneBot v11 中是 QQ 号，QQ 官方机器人中是 OpenID。"
+        },
         "reply_prefix": {
           "description": "回复时的文本前缀",
           "hint": "回复中附带的文本前缀。"

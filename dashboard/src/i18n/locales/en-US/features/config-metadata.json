@@ -989,6 +989,10 @@
           "description": "Private Messages Require Wake Word",
           "hint": "Private messages must also include a wake prefix to activate the bot."
         },
+        "wake_user_ids": {
+          "description": "Wake by User ID",
+          "hint": "In group chats, messages from listed users wake the bot without a mention or wake prefix. Send /sid in the group to get the UID. OneBot v11 uses a QQ number; QQ Official uses an OpenID."
+        },
         "reply_prefix": {
           "description": "Reply Text Prefix",
           "hint": "The text prefix added to replies."

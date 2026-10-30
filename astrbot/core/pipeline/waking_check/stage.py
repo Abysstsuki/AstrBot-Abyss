@@ -4,6 +4,7 @@ from astrbot import logger
 from astrbot.core.message.components import At, AtAll, Reply
 from astrbot.core.message.message_event_result import MessageChain, MessageEventResult
 from astrbot.core.platform.astr_message_event import AstrMessageEvent
+from astrbot.core.platform.message_type import MessageType
 from astrbot.core.star.filter.command_group import CommandGroupFilter
 from astrbot.core.star.filter.permission import PermissionTypeFilter
 from astrbot.core.star.session_plugin_manager import SessionPluginManager
@@ -18,13 +19,10 @@ from .umo_auto_name import UmoAutoNameRecorder
 
 @register_stage
 class WakingCheckStage(Stage):
-    """检查是否需要唤醒。唤醒机器人有如下几点条件：
+    """Determine whether an incoming message should wake the bot.
 
-    1. 机器人被 @ 了
-    2. 机器人的消息被提到了
-    3. 以 wake_prefix 前缀开头，并且消息没有以 At 消息段开头
-    4. 插件（Star）的 handler filter 通过
-    5. 私聊情况下，位于 admins_id 列表中的管理员的消息（在白名单阶段中）
+    Wake conditions include bot mentions and replies, wake prefixes, configured
+    group sender IDs, matching plugin handlers, and allowed private messages.
     """
 
     async def initialize(self, ctx: PipelineContext) -> None:
@@ -43,6 +41,14 @@ class WakingCheckStage(Stage):
         self.friend_message_needs_wake_prefix = self.ctx.astrbot_config[
             "platform_settings"
         ].get("friend_message_needs_wake_prefix", False)
+        wake_user_ids = self.ctx.astrbot_config["platform_settings"].get(
+            "wake_user_ids", []
+        )
+        self.wake_user_ids = {
+            str(user_id).strip()
+            for user_id in wake_user_ids
+            if user_id is not None and str(user_id).strip()
+        }
         # 是否忽略机器人自己发送的消息
         self.ignore_bot_self_message = self.ctx.astrbot_config["platform_settings"].get(
             "ignore_bot_self_message",
@@ -141,6 +147,16 @@ class WakingCheckStage(Stage):
                 event.is_wake = True
                 event.is_at_or_wake_command = True
                 wake_prefix = ""
+
+        # Wake configured group members even when they do not mention the bot.
+        if (
+            not is_wake
+            and event.get_message_type() == MessageType.GROUP_MESSAGE
+            and str(event.get_sender_id() or "").strip() in self.wake_user_ids
+        ):
+            is_wake = True
+            event.is_wake = True
+            event.is_at_or_wake_command = True
 
         # 检查插件的 handler filter
         activated_handlers = []

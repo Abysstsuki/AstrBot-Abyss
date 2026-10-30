@@ -128,6 +128,7 @@ DEFAULT_CONFIG = {
         "empty_mention_waiting": True,
         "empty_mention_waiting_need_reply": True,
         "friend_message_needs_wake_prefix": False,
+        "wake_user_ids": [],
         "ignore_bot_self_message": False,
         "ignore_at_all": False,
     },
@@ -1187,6 +1188,11 @@ CONFIG_METADATA_2 = {
                     "friend_message_needs_wake_prefix": {
                         "type": "bool",
                         "hint": "启用后，私聊消息需要唤醒前缀才会被处理，同群聊一样。",
+                    },
+                    "wake_user_ids": {
+                        "type": "list",
+                        "items": {"type": "string"},
+                        "hint": "群聊中，列表内用户发送的消息会直接唤醒机器人，无需 @ 或唤醒词。在群内发送 /sid 获取 UID；OneBot v11 中是 QQ 号，QQ 官方机器人中是 OpenID。",
                     },
                     "ignore_bot_self_message": {
                         "type": "bool",
@@ -4420,6 +4426,12 @@ CONFIG_METADATA_3 = {
                     "wake_prefix": {
                         "description": "唤醒词",
                         "hint": "唤醒机器人的消息前缀的列表。也可以通过 @ 机器人来唤醒。",
+                        "type": "list",
+                        "items": {"type": "string"},
+                    },
+                    "platform_settings.wake_user_ids": {
+                        "description": "用户 ID 唤醒",
+                        "hint": "群聊中，列表内用户发送的消息会直接唤醒机器人，无需 @ 或唤醒词。在群内发送 /sid 获取 UID；OneBot v11 中是 QQ 号，QQ 官方机器人中是 OpenID。",
                         "type": "list",
                         "items": {"type": "string"},
                     },
