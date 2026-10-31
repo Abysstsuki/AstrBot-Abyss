@@ -380,6 +380,7 @@ class GetGroupMessageHistoryTool(FunctionTool[AstrAgentContext]):
     parameters: dict = Field(
         default_factory=lambda: {
             "type": "object",
+            "required": [],
             "properties": {
                 "limit": {
                     "type": "integer",
