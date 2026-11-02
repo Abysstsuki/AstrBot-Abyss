@@ -350,6 +350,7 @@ class FunctionToolManager:
         params = {
             "type": "object",  # hard-coded here
             "properties": {},
+            "required": [param["name"] for param in func_args],
         }
         for param in func_args:
             p = copy.deepcopy(param)
